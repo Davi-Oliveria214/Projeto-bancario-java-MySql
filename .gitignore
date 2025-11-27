@@ -1,0 +1,8 @@
+.project
+.classpath
+.settings/
+
+/bin/
+
+config.properties
+config.properties.gitignore
