@@ -3,7 +3,6 @@ package projetoBancario.informacoes;
 import projetoBancario.DAO.UsuarioDAO;
 import projetoBancario.excecoes.ExcecoesBanco;
 import projetoBancario.excecoes.excecoesCadastro.EmailInvalido;
-import projetoBancario.excecoes.excessaoEditarUser.excessaoEditarNome;
 import projetoBancario.sessao.Sessao;
 
 public class EditarUser {
@@ -13,19 +12,6 @@ public class EditarUser {
 	public EditarUser() {
 		usuario = Sessao.getLogado();
 		usuarioDAO = new UsuarioDAO();
-	}
-
-	public void editarNome(String nome) throws ExcecoesBanco {
-		if (nome.isEmpty()) {
-			throw new excessaoEditarNome("O nome de usuário não pode estar vazio");
-		}
-
-		if (usuario.getNome().equals(nome)) {
-			throw new excessaoEditarNome("Digite um novo nome de usuário para alterar");
-		}
-
-		usuario.setNome(nome);
-		usuarioDAO.atualizarUser(usuario);
 	}
 
 	public void editarEmail(String email) throws ExcecoesBanco {
