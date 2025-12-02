@@ -249,14 +249,24 @@ public class TelaUsuario extends JFrame {
 
 		panel.setLayout(gbl_panel);
 
+		lblInfoNome = new JLabel("Nome: " + user.getNome());
+		lblInfoNome.setFont(new Font("Arial", Font.BOLD, 16));
+		lblInfoNome.setForeground(Cores.fonte());
+		GridBagConstraints gbc_info_nome = new GridBagConstraints();
+		gbc_info_nome.anchor = GridBagConstraints.WEST;
+		gbc_info_nome.gridx = 0;
+		gbc_info_nome.gridy = 0;
+		gbc_info_nome.insets = new Insets(0, 0, 5, 0);
+		panel.add(lblInfoNome, gbc_info_nome);
+
 		lblInfoEmail = new JLabel("Email:");
 		lblInfoEmail.setFont(new Font("Arial", Font.BOLD, 16));
 		lblInfoEmail.setForeground(Cores.fonte());
 		GridBagConstraints gbc_info_email = new GridBagConstraints();
-		gbc_info_email.insets = new Insets(0, 0, 5, 0);
+		gbc_info_email.insets = new Insets(15, 0, 0, 0);
 		gbc_info_email.anchor = GridBagConstraints.WEST;
 		gbc_info_email.gridx = 0;
-		gbc_info_email.gridy = 0;
+		gbc_info_email.gridy = 1;
 		panel.add(lblInfoEmail, gbc_info_email);
 
 		txtEmail = new JTextField(user.getEmail());
@@ -264,51 +274,22 @@ public class TelaUsuario extends JFrame {
 		gbc_info_email.insets = new Insets(0, 0, 5, 0);
 		gbc_info_email.anchor = GridBagConstraints.WEST;
 		gbc_info_email.gridx = 0;
-		gbc_info_email.gridy = 1;
-		panel.add(txtEmail, gbc_info_email);
-
-		lblInfoNome = new JLabel("Nome:");
-		lblInfoNome.setFont(new Font("Arial", Font.BOLD, 16));
-		lblInfoNome.setForeground(Cores.fonte());
-		GridBagConstraints gbc_info_nome = new GridBagConstraints();
-		gbc_info_nome.anchor = GridBagConstraints.WEST;
-		gbc_info_nome.gridx = 0;
-		gbc_info_nome.gridy = 2;
-		gbc_info_nome.insets = new Insets(15, 0, 0, 0);
-		panel.add(lblInfoNome, gbc_info_nome);
-
-		txtNome = new JTextField(user.getNome());
-		txtNome.setPreferredSize(Dimensao.caixasTexto());
-		gbc_info_email.insets = new Insets(5, 0, 0, 0);
-		gbc_info_email.anchor = GridBagConstraints.WEST;
-		gbc_info_email.gridx = 0;
 		gbc_info_email.gridy = 3;
-		panel.add(txtNome, gbc_info_email);
+		panel.add(txtEmail, gbc_info_email);
 
 		Border bordaLinha = BorderFactory.createLineBorder(Cores.fonte(), 2);
 		Border padding = BorderFactory.createEmptyBorder(2, 5, 2, 5);
 		Border bordaBotao = BorderFactory.createCompoundBorder(bordaLinha, padding);
-
-		JButton btnAlterarNome = new JButton("Alterar nome");
-		btnAlterarNome.setFont(Fontes.botoes());
-		btnAlterarNome.setBackground(Cores.fundoBotoes());
-		btnAlterarNome.setForeground(Cores.fonte());
-		btnAlterarNome.setBorder(bordaBotao);
-		gbc_info_email.insets = new Insets(2, 10, 0, 0);
-		gbc_info_email.anchor = GridBagConstraints.WEST;
-		gbc_info_email.gridx = 2;
-		gbc_info_email.gridy = 3;
-		panel.add(btnAlterarNome, gbc_info_email);
 
 		JButton btnAlterarEmail = new JButton("Alterar email");
 		btnAlterarEmail.setFont(Fontes.botoes());
 		btnAlterarEmail.setBackground(Cores.fundoBotoes());
 		btnAlterarEmail.setForeground(Cores.fonte());
 		btnAlterarEmail.setBorder(bordaBotao);
-		gbc_info_email.insets = new Insets(2, 10, 0, 0);
+		gbc_info_email.insets = new Insets(0, 10, 0, 0);
 		gbc_info_email.anchor = GridBagConstraints.WEST;
 		gbc_info_email.gridx = 2;
-		gbc_info_email.gridy = 1;
+		gbc_info_email.gridy = 3;
 		panel.add(btnAlterarEmail, gbc_info_email);
 
 		JButton btnCancelarAlt = new JButton("Cancelar alteração");
@@ -332,7 +313,6 @@ public class TelaUsuario extends JFrame {
 
 		setVisible(true);
 
-		btnAlterarNome.addActionListener(this::alterarNome);
 		btnAlterarEmail.addActionListener(this::alterarEmail);
 		btnCancelarAlt.addActionListener(this::cancelarAlt);
 
@@ -349,21 +329,6 @@ public class TelaUsuario extends JFrame {
 
 		JOptionPane.showMessageDialog(this, "Alteração permanecerão as mesma do usuário", "Aviso Banco",
 				JOptionPane.INFORMATION_MESSAGE);
-	}
-
-	private void alterarNome(ActionEvent e) {
-		try {
-			editarUser.editarNome(txtNome.getText());
-
-			JOptionPane.showMessageDialog(this, "Informações alteradas com sucesso!!!", "Aviso Banco",
-					JOptionPane.INFORMATION_MESSAGE);
-
-			txtNome.setText(user.getNome());
-		} catch (Exception e2) {
-			txtNome.setText(user.getNome());
-
-			JOptionPane.showMessageDialog(this, e2.getMessage(), "Aviso Banco", JOptionPane.ERROR_MESSAGE);
-		}
 	}
 
 	private void alterarEmail(ActionEvent e) {
